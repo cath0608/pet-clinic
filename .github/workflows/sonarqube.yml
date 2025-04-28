@@ -25,7 +25,7 @@ jobs:
         sonar-scanner \
           -Dsonar.projectKey=spring-petclinic \
           -Dsonar.sources=src \
-          -Dsonar.host.url=http://<your-vm-ip>:9000 \
+          -Dsonar.host.url=http://34.93.127.207:9000 \
           -Dsonar.login=$SONAR_TOKEN
 
     - name: Check Quality Gate
@@ -33,7 +33,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         sleep 30
-        STATUS=$(curl -s -u $SONAR_TOKEN: http://<your-vm-ip>:9000/api/qualitygates/project_status?projectKey=spring-petclinic | jq -r '.projectStatus.status')
+        STATUS=$(curl -s -u $SONAR_TOKEN: http://34.93.127.207:9000/api/qualitygates/project_status?projectKey=spring-petclinic | jq -r '.projectStatus.status')
         if [ "$STATUS" != "OK" ]; then
           echo "Quality Gate failed!"
           exit 1
